@@ -29,7 +29,6 @@ public class Main extends Application {
 
     // Debug/Variables
     public static final int MAX_INPUT_LENGTH = 3;
-    public static final Color CURRENT_ARROW_COLOR = Color.INDIANRED; // Default: INDIANRED
     public static final Color FIRST_LAST_ARROW_COLOR = Color.BLUE; // Default: BLUE
     public static final Color CONTENT_COLOR_CURRENT = Color.GRAY; // Default: GRAY
     public static final Color CONTENT_COLOR_GOT = Color.WHITE; // Default: WHITE
@@ -42,7 +41,7 @@ public class Main extends Application {
 
         primaryScene = new Scene(new StartScreen(), WINDOW_WIDTH, WINDOW_HEIGHT);
 
-        stage.setTitle("List-Visualizer");
+        stage.setTitle("QueueList-Visualizer");
         stage.setScene(primaryScene);
         stage.show();
 
@@ -54,7 +53,7 @@ public class Main extends Application {
         createListView(2, true);
 
         for (int i = 0; i < 8; i++)
-            primaryList.append(new ListElement((i * 2) + 3));
+            primaryList.add(new ListElement((i * 2) + 3));
     }
 
     public static void createListView(int i, boolean createWithElement) {
@@ -80,42 +79,13 @@ public class Main extends Application {
 
         StackPane outputPane = new StackPane(outPutBackground, outputLabel);
 
-        // Current null Label
-        Rectangle currentNullBackground = buildRectangle("currentNullLabel_Background", WINDOW_WIDTH * 0.32, WINDOW_HEIGHT * 0.08, Color.WHITE, false, null, 0);
-        Label currentNullLabel = buildLabel("currentNullLabel", "Current: Null", Font.font(TEXT_FONT, FontWeight.EXTRA_BOLD, FONT_SIZE * 1.5), TextAlignment.CENTER, Color.DARKRED);
-
-        StackPane currentNullPane = new StackPane(currentNullBackground, currentNullLabel);
-
         // Buttons
-        Button appendButton = createStandardButton("append(Content)");
-        Button setContentButton = createStandardButton("setContent(Content)");
-        Button insertButton = createStandardButton("insert(Content)");
-        Button removeButton = createStandardButton("remove()");
-        Button getContentButton = createStandardButton("getContent()");
-        Button toFirstButton = createStandardButton("toFirst()");
-        Button toLastButton = createStandardButton("toLast()");
-        Button nextButton = createStandardButton("next()");
+        Button addButton = createStandardButton("enqueue(Content)"); // Here I use the term 'enqueue' because that's how it's written in the doc. To make it easier to read I use 'add', that is exactly what it does.
+        Button removeButton = createStandardButton("dequeue()"); // Here I use the term 'dequeue' because that's how it's written in the doc. To make it easier to read I use 'remove', that is exactly what it does.
         Button isEmptyButton = createStandardButton("isEmpty()");
-        Button hasCurrentAccess = createStandardButton("hasCurrentAccess()");
 
         // Actions
-        getContentButton.setOnMouseClicked(_ -> primaryList.getContentNode());
-        removeButton.setOnMouseClicked(_ -> {
-            primaryList.remove();
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
-        nextButton.setOnMouseClicked(_ -> {
-            primaryList.next();
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
-        toLastButton.setOnMouseClicked(_ -> {
-            primaryList.toLast();
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
-        toFirstButton.setOnMouseClicked(_ -> {
-            primaryList.toFirst();
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
+        removeButton.setOnMouseClicked(_ -> primaryList.remove());
         isEmptyButton.setOnMouseClicked(_ -> {
             if (primaryList.isEmpty()) {
                 outputLabel.setText("Output: true");
@@ -125,49 +95,20 @@ public class Main extends Application {
                 outputLabel.setTextFill(Color.RED);
             }
         });
-        hasCurrentAccess.setOnMouseClicked(_ -> {
-            if (primaryList.hasCurrentAccess()) {
-                outputLabel.setText("Output: true");
-                outputLabel.setTextFill(Color.GREEN);
-            } else {
-                outputLabel.setText("Output: false");
-                outputLabel.setTextFill(Color.RED);
-            }
-        });
 
         // With input
-        appendButton.setOnMouseClicked(_ -> {
+        addButton.setOnMouseClicked(_ -> {
             if (!inputBox.getText().isEmpty() && isStringInt(inputBox.getText()) && inputBox.getText().length() <= Main.MAX_INPUT_LENGTH)
-                primaryList.append(new ListElement(Integer.parseInt(inputBox.getText())));
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
-        insertButton.setOnMouseClicked(_ -> {
-            if (!inputBox.getText().isEmpty() && isStringInt(inputBox.getText()) && inputBox.getText().length() <= Main.MAX_INPUT_LENGTH)
-                primaryList.insert(new ListElement(Integer.parseInt(inputBox.getText())));
-            currentNullPane.setVisible(!primaryList.hasCurrentAccess());
-        });
-        setContentButton.setOnMouseClicked(_ -> {
-            if (!inputBox.getText().isEmpty() && isStringInt(inputBox.getText()) && inputBox.getText().length() <= Main.MAX_INPUT_LENGTH)
-                primaryList.setContentFromNode(Integer.parseInt(inputBox.getText()));
+                primaryList.add(new ListElement(Integer.parseInt(inputBox.getText())));
         });
 
         double buttonSpacing = WINDOW_HEIGHT * 0.01;
         HBox buttonPane = new HBox(buttonSpacing,
                 new VBox(buttonSpacing,
-                        nextButton,
-                        toFirstButton,
-                        toLastButton,
-                        currentNullPane
+                        addButton,
+                        removeButton
                 ),
                 new VBox(buttonSpacing,
-                        appendButton,
-                        insertButton,
-                        removeButton,
-                        hasCurrentAccess
-                ),
-                new VBox(buttonSpacing,
-                        setContentButton,
-                        getContentButton,
                         isEmptyButton,
                         outputPane
                 )
