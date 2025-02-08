@@ -8,11 +8,9 @@ public class Queue extends ScrollPane {
 
     private final ListView LIST_VIEW = new ListView();
 
-    private int currentPos;
     private int listLength;
 
     private ListElement first;
-    private ListElement current;
     private ListElement last;
 
     public Queue(ListElement firstElement) {
@@ -29,11 +27,9 @@ public class Queue extends ScrollPane {
         setMinHeight(Main.WINDOW_HEIGHT * 0.35);
 
 
-        currentPos = -1;
         listLength = 0;
 
         first = null;
-        current = null;
         last = null;
     }
 
@@ -74,12 +70,6 @@ public class Queue extends ScrollPane {
 
                 LIST_VIEW.addNode(e, currentPos);
             } // Sonst eigentlich, fehler schmeißen
-        }
-    }
-
-    public void setContentFromNode(int content) {
-        if (current != null) {
-            current.setContent(content);
         }
     }
 
@@ -131,54 +121,11 @@ public class Queue extends ScrollPane {
         }
     }
 
-    public void next() {
-        if (current != null) {
-            current.getGraphicObject().setCurrentArrowVisible(false);
-            current = current.getNext();
-
-            currentPos++;
-            if (current != null) current.getGraphicObject().setCurrentArrowVisible(true);
-        }
-    }
-
-    public void toFirst() {
-        if (first != null) {
-            if (current != null) current.getGraphicObject().setCurrentArrowVisible(false);
-
-            current = first;
-
-            currentPos = 1;
-            current.getGraphicObject().setCurrentArrowVisible(true);
-        }
-    }
-
-    public void toLast() {
-        if (last != null) {
-            if (current != null) current.getGraphicObject().setCurrentArrowVisible(false);
-
-            current = last;
-
-            currentPos = listLength;
-            current.getGraphicObject().setCurrentArrowVisible(true);
-        }
-    }
-
-    public void getContentNode() {
-        if (current != null) {
-            current.getGraphicObject().getContent();
-        }
-    }
-
     public boolean isEmpty() {
         return first == null && last == null;
     }
 
-    public boolean hasCurrentAccess() {
-        return current != null;
-    }
-
     private void addFirstElement(ListElement e) {
-        currentPos = 2;
         listLength = 1;
 
         first = e;
@@ -188,27 +135,6 @@ public class Queue extends ScrollPane {
         e.getGraphicObject().setPosArrowVisible(true);
 
         LIST_VIEW.addNode(e, 1);
-    }
-
-    private ListElement getPreviousElement() {
-        if (current != first) {
-            ListElement cur = current;
-
-            toFirst();
-
-            while (current.getNext() != cur) {
-                next();
-
-                if (current == last) return null;
-            }
-            ListElement result = current;
-
-            current.getGraphicObject().setCurrentArrowVisible(false);
-            current = cur;
-            current.getGraphicObject().setCurrentArrowVisible(true);
-
-            return result;
-        } else return null;
     }
 
 }
