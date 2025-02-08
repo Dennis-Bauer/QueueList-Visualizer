@@ -101,12 +101,12 @@ public class Queue extends ScrollPane {
             } else {
                 first = first.getNext();
 
-                if (first != null) {
-                    first.getGraphicObject().setPosArrowVisible(true);
-                    first.getGraphicObject().setPosArrowToFirst();
+            if (first != null) {
+                if (first == last) first.getGraphicObject().setPosArrowToBoth();
+                else first.getGraphicObject().setPosArrowToFirst();
 
-                    current = current.getNext();
-                    if (current != null) current.getGraphicObject().setCurrentArrowVisible(true);
+                first.getGraphicObject().setPosArrowVisible(true);
+            } else last = null;
 
                     LIST_VIEW.removeNode(1);
                 } else {
