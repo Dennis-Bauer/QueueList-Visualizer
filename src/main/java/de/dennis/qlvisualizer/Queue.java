@@ -33,73 +33,29 @@ public class Queue extends ScrollPane {
         last = null;
     }
 
-    public void append(ListElement e) {
-        if (last == null ) addFirstElement(e);
-        else if (last.getNext() == null) {
+    public void add(ListElement e) {
+        if (first == null) addFirstElement(e);
+        else {
             listLength++;
 
-            if (first == last) last.getGraphicObject().setPosArrowToFirst();
+            if (last == first) last.getGraphicObject().setPosArrowToFirst();
             else last.getGraphicObject().setPosArrowVisible(false);
 
             last.setNext(e);
             last = e;
 
-            e.getGraphicObject().setPosArrowToLast();
-            e.getGraphicObject().setPosArrowVisible(true);
+            last.getGraphicObject().setPosArrowToLast();
+            last.getGraphicObject().setPosArrowVisible(true);
 
             LIST_VIEW.addNode(e, listLength);
-        }
-        else throw new IllegalCallerException("Das 'Nächste Element' vom letztem Element, ist nicht Null! So kann es nicht das letzte Element sein!");
-    }
-
-    public void insert(ListElement e) {
-        if (last == null && first == null) addFirstElement(e);
-        else {
-            if (current != null) {
-                listLength++;
-
-                e.setNext(current.getNext());
-                current.setNext(e);
-
-                if (current == last) {
-                    last.getGraphicObject().setPosArrowVisible(false);
-                    last = e;
-                    last.getGraphicObject().setPosArrowToLast();
-                    last.getGraphicObject().setPosArrowVisible(true);
-                }
-
-                LIST_VIEW.addNode(e, currentPos);
-            } // Sonst eigentlich, fehler schmeißen
         }
     }
 
     public void remove() {
-        if (current != null) {
-            ListElement previous = getPreviousElement();
-            if (previous != null) {
-                listLength--;
+        if (first != null) {
+            listLength--;
 
-                if (current == last) {
-                    last = previous;
-                    last.setNext(null);
-
-                    last.getGraphicObject().setPosArrowToLast();
-                    last.getGraphicObject().setPosArrowVisible(true);
-
-                    current = null;
-
-                    LIST_VIEW.removeNode(currentPos + 1);
-                } else {
-                    previous.setNext(current.getNext());
-
-                    LIST_VIEW.removeNode(currentPos + 1);
-
-
-                    current = current.getNext();
-                    current.getGraphicObject().setCurrentArrowVisible(true);
-                }
-            } else {
-                first = first.getNext();
+            first = first.getNext();
 
             if (first != null) {
                 if (first == last) first.getGraphicObject().setPosArrowToBoth();
@@ -108,16 +64,7 @@ public class Queue extends ScrollPane {
                 first.getGraphicObject().setPosArrowVisible(true);
             } else last = null;
 
-                    LIST_VIEW.removeNode(1);
-                } else {
-                    LIST_VIEW.removeNode(1);
-
-                    current = null;
-                    first = null;
-                    last = null;
-                }
-
-            }
+            LIST_VIEW.removeNode(1);
         }
     }
 
