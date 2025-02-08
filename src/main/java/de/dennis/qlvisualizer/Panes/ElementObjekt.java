@@ -2,6 +2,7 @@ package de.dennis.qlvisualizer.Panes;
 
 import de.dennis.qlvisualizer.Main;
 import de.dennis.qlvisualizer.Utilities.ArrowObjekt;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -22,14 +23,9 @@ public class ElementObjekt extends HBox {
 
     private final String CONTENT_ADDON = "'";
 
-    // Content
-    private final StackPane contentRectanglePane;
     private final Label contentLabel;
-    private final VBox contentPane;
 
     // Programm Arrows
-    private final ArrowObjekt currentArrow = new ArrowObjekt("currentArrow", new Point2D(0, 0), Main.WINDOW_HEIGHT * 0.045, Main.WINDOW_WIDTH * 0.01, Main.WINDOW_HEIGHT * 0.03, Main.WINDOW_WIDTH * 0.025, Main.CURRENT_ARROW_COLOR);
-
     private final VBox posArrow;
     private final Label posArrowLabel = buildLabel("posArrow_label", "First", Font.font(Main.TEXT_FONT, FontWeight.BOLD, Main.FONT_SIZE * 0.7), TextAlignment.CENTER, Color.BLUE);
 
@@ -42,11 +38,8 @@ public class ElementObjekt extends HBox {
         Rectangle backgroundRectangle = buildRectangle("graphicObject_Background", Main.WINDOW_WIDTH * 0.08, Main.WINDOW_WIDTH * 0.08, Color.BLACK, true, Color.WHITE, 2);
         contentLabel = buildLabel("graphicObject_Text", (CONTENT_ADDON + content + CONTENT_ADDON), Font.font(Main.TEXT_FONT, FontPosture.REGULAR, Main.FONT_SIZE), TextAlignment.CENTER, Main.CONTENT_COLOR_NOTHING);
 
-        contentRectanglePane = new StackPane(backgroundRectangle, contentLabel);
-
-        // Current Arrow
-        Label currentArrowLabel = buildLabel("currentArrow_label", "Current", Font.font(Main.TEXT_FONT, FontWeight.BOLD, Main.FONT_SIZE * 0.7), TextAlignment.CENTER, Color.BLUE);
-        currentArrow.getChildren().add(currentArrowLabel);
+        // Content
+        StackPane contentRectanglePane = new StackPane(backgroundRectangle, contentLabel);
 
         //Pos Arrow
         ArrowObjekt posArrowObj = new ArrowObjekt("posArrow", new Point2D(0, 0), Main.WINDOW_HEIGHT * 0.045, Main.WINDOW_WIDTH * 0.01, Main.WINDOW_HEIGHT * 0.03, Main.WINDOW_WIDTH * 0.025, Main.FIRST_LAST_ARROW_COLOR);
@@ -55,29 +48,16 @@ public class ElementObjekt extends HBox {
         posArrow = new VBox(-0.5, posArrowLabel, posArrowObj);
         posArrow.setAlignment(Pos.CENTER);
 
-        // Content Pane
-        contentPane = new VBox(posArrow, contentRectanglePane, currentArrow);
-
         // Content Arrow
         contentArrowObj = new ArrowObjekt("contentArrow", new Point2D(0, 0), Main.WINDOW_HEIGHT * 0.025, Main.WINDOW_WIDTH * 0.005, Main.WINDOW_HEIGHT * 0.015, Main.WINDOW_WIDTH * 0.0125, Color.BLACK);
         contentArrowObj.setRotate(90);
 
-        getChildren().addAll(contentPane, contentArrowObj);
+        getChildren().addAll(new VBox(posArrow, contentRectanglePane), contentArrowObj);
         setSpacing(-0.1);
 
-        setCurrentArrowVisible(false);
-        setPosArrowVisible(false);
-    }
+        HBox.setMargin(contentArrowObj, new Insets(Main.WINDOW_HEIGHT * 0.10, 0, 0, 0));
 
-    public void setCurrentArrowVisible(boolean isVisible) {
-        currentArrow.setVisible(isVisible);
-
-        if (isVisible) contentLabel.setTextFill(Main.CONTENT_COLOR_CURRENT);
-        else contentLabel.setTextFill(Main.CONTENT_COLOR_NOTHING);
-    }
-
-    public void getContent() {
-        contentLabel.setTextFill(Main.CONTENT_COLOR_GOT);
+        setPosArrowVisible(true);
     }
 
     public void setContent(int i) {
@@ -87,6 +67,10 @@ public class ElementObjekt extends HBox {
 
     public void setPosArrowVisible(boolean isVisible) {
         posArrow.setVisible(isVisible);
+
+        if (isVisible) contentLabel.setTextFill(Main.CONTENT_COLOR_CURRENT);
+        else contentLabel.setTextFill(Main.CONTENT_COLOR_NOTHING);
+
         if (!isVisible) contentArrowObj.setVisible(true);
     }
 
