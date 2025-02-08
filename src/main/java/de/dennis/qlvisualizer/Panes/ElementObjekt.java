@@ -60,11 +60,6 @@ public class ElementObjekt extends HBox {
         setPosArrowVisible(true);
     }
 
-    public void setContent(int i) {
-        contentLabel.setText(CONTENT_ADDON + i + CONTENT_ADDON);
-        contentLabel.setTextFill(Main.CONTENT_COLOR_CURRENT);
-    }
-
     public void setPosArrowVisible(boolean isVisible) {
         posArrow.setVisible(isVisible);
 
@@ -87,6 +82,14 @@ public class ElementObjekt extends HBox {
     public void setPosArrowToBoth() {
         posArrowLabel.setText("First & Last");
         contentArrowObj.setVisible(false);
+    }
+
+    public void showContent() {
+        contentLabel.setTextFill(Main.CONTENT_COLOR_GOT);
+    }
+
+    public void resetShow() {
+        contentLabel.setTextFill(Main.CONTENT_COLOR_CURRENT);
     }
 
 }

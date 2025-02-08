@@ -23,11 +23,6 @@ public class ListElement {
         return next;
     }
 
-    public void setContent(int content) {
-        this.content = content;
-        getGraphicObject().setContent(content);
-    }
-
     public void setNext(ListElement next) {
         this.next = next;
     }

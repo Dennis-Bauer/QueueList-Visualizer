@@ -38,6 +38,9 @@ public class Queue extends ScrollPane {
         else {
             listLength++;
 
+            // Reset front() method
+            first.getGraphicObject().resetShow();
+
             if (last == first) last.getGraphicObject().setPosArrowToFirst();
             else last.getGraphicObject().setPosArrowVisible(false);
 
@@ -82,6 +85,12 @@ public class Queue extends ScrollPane {
         e.getGraphicObject().setPosArrowVisible(true);
 
         LIST_VIEW.addNode(e, 1);
+    }
+
+    public void front() {
+        if (first != null) {
+            first.getGraphicObject().showContent();
+        }
     }
 
 }

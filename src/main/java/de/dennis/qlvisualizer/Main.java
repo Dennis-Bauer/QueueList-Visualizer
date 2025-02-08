@@ -83,8 +83,10 @@ public class Main extends Application {
         Button addButton = createStandardButton("enqueue(Content)"); // Here I use the term 'enqueue' because that's how it's written in the doc. To make it easier to read I use 'add', that is exactly what it does.
         Button removeButton = createStandardButton("dequeue()"); // Here I use the term 'dequeue' because that's how it's written in the doc. To make it easier to read I use 'remove', that is exactly what it does.
         Button isEmptyButton = createStandardButton("isEmpty()");
+        Button frontButton = createStandardButton("front()");
 
         // Actions
+        frontButton.setOnMouseClicked(_ -> primaryList.front());
         removeButton.setOnMouseClicked(_ -> primaryList.remove());
         isEmptyButton.setOnMouseClicked(_ -> {
             if (primaryList.isEmpty()) {
@@ -110,6 +112,7 @@ public class Main extends Application {
                 ),
                 new VBox(buttonSpacing,
                         isEmptyButton,
+                        frontButton,
                         outputPane
                 )
         );
