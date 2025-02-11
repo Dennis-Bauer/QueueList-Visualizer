@@ -1,6 +1,7 @@
 package de.dennis.qlvisualizer;
 
 import de.dennis.qlvisualizer.Panes.StartScreen;
+import de.dennis.qlvisualizer.Utilities.ConsoleUtilities;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -44,7 +45,7 @@ public class Main extends Application {
         stage.setTitle("QueueList-Visualizer");
         stage.setScene(primaryScene);
         stage.show();
-
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program successful launched.");
     }
 
     private static Queue primaryList;
@@ -132,6 +133,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program started, try to launch...");
         launch();
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program stopped.");
     }
 }
