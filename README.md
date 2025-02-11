@@ -40,62 +40,46 @@ Diese **Queue-List Visualisierung** bietet eine intuitive Möglichkeit, das Verh
 
 # **Queue List Visualizer (English)**  
 
-A visualization tool for linked lists, programmed in **Java** with **JavaFX**.  
+A visualization tool for queue lists, programmed in **Java** with **JavaFX**.  
 
 ## **Features**  
 
-- **Current Pointer Display**: Only the node where the **Current pointer** is located is visible.  
-- **Pointer Visualization**: The three pointers (**Current**, **First**, **Last**) are displayed.  
-- **No visible values in the nodes**: Values at the Current pointer are only fully visible when `getContent()` is called.  
-- **Predefined Test List**: A predefined list can be used and modified.  
-- **Creating New Lists**:  
+- **Pointer visualization**: Displays the two pointers (**First**, **Last**).  
+- **No visible values in the nodes**: Values at the First pointer become fully visible only when `front()` is called.  
+- **Predefined test list**: A prebuilt list can be used and modified.  
+- **Creation of new lists**:  
   - Empty list  
   - List with an initial element  
-- **Method names as button labels**: The buttons are named exactly as the methods.  
-- **Input via Input Box**: Values are taken from the input box.  
-- **Customizable Display** in the `Main` class:  
+- **Method names as button labels**: Buttons are named exactly like the methods.  
+- **Input via input box**: Values are taken from the input box.  
+- **Customizable display** in the `Main` class:  
   - **Window size**  
-  - **Font style and size**  
+  - **Font and font size**  
   - **Arrow colors**  
-- **Integer List**: By default, numbers are limited to **3 digits** (configurable in `Main`).  
+- **Integer list**: By default, numbers are **limited to 3 digits** (customizable in `Main`).  
 
 ## **Methods**  
 
-### `next()`  
-Moves the **Current pointer** to the next node. If it reaches the end, it is set to `null`. If `Current == null`, nothing happens.  
-
-### `toFirst()`  
-Sets the **Current pointer** to the first element. If the list is empty, `Current` remains `null`.  
-
-### `toLast()`  
-Sets the **Current pointer** to the last element. If the list is empty, `Current` remains `null`.  
-
-### `append(Content)`  
+### `enqueue(Content)`  
 Adds the **element to the end** of the list (`Content` from the input box).  
 
-### `insert(Content)`  
-Inserts an **element right next to** the Current pointer (`Content` from the input box).  
+### `dequeue()`  
+Removes the **first element** of the list.  
 
-### `remove()`  
-Deletes the **element at the Current pointer**. If `Current == null`, nothing happens.  
-
-### `hasCurrentAccess()`  
-Returns `true` if `Current` is **not null**, otherwise `false`. The result is displayed in the **Output label**.  
-
-### `setContent(Content)`  
-Changes the **value of the current node** (`Content` from the input box). If `Current == null`, nothing happens.  
-
-### `getContent()`  
-Makes the stored number in the **List-View lighter** when `Current` points to a valid node.  
+### `front()`  
+Highlights the stored number at the **First pointer** in the list view.  
 
 ### `isEmpty()`  
 Returns `true` if the list is **empty**.  
 
 ---
 
-This **Linked List Visualization** provides an intuitive way to understand and test the behavior of a **linked list**.
+This **Queue List Visualization** provides an intuitive way to understand and test the behavior of a **queue list**.  
+
+---
 
 # **Example Pictures (Beispiel Bilder)**  
-<img width="790" alt="List_normalView" src="https://github.com/user-attachments/assets/226676b7-6cba-4af7-be69-1b58dfbfd6a8" />
-<img width="790" alt="List_CreateNewListView" src="https://github.com/user-attachments/assets/baa75520-8557-4167-ab63-bbdd86b9a1c1" />
-<img width="789" alt="List_1Element_Current-Null_IsEmpty-False" src="https://github.com/user-attachments/assets/f238c367-aa5a-45f6-a9e9-9f870789129a" />
+
+<img width="788" alt="QV-Startscreen" src="https://github.com/user-attachments/assets/8489504d-c8d9-4635-be9c-94906014a8e7" />
+<img width="790" alt="QV-ListView+Function" src="https://github.com/user-attachments/assets/dfb19e28-192a-4a4d-8c51-dcc4e2f0ea15" />
+<img width="793" alt="QV-ListView" src="https://github.com/user-attachments/assets/9ca4147d-8110-43b5-8f95-eb29d9cf10f8" />
