@@ -112,8 +112,7 @@ public class Main extends Application {
                 ),
                 new VBox(buttonSpacing,
                         isEmptyButton,
-                        frontButton,
-                        outputPane
+                        frontButton
                 )
         );
 
@@ -122,6 +121,7 @@ public class Main extends Application {
         primaryScene.setRoot(new VBox(WINDOW_HEIGHT * 0.02,
                 primaryList,
                 buttonPane,
+                outputPane,
                 inputBoxPane
         ));
     }
