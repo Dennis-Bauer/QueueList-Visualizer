@@ -33,7 +33,7 @@ public class Queue extends ScrollPane {
         last = null;
     }
 
-    public void add(ListElement e) {
+    public void enqueue(ListElement e) {
         if (first == null) addFirstElement(e);
         else {
             listLength++;
@@ -54,7 +54,7 @@ public class Queue extends ScrollPane {
         }
     }
 
-    public void remove() {
+    public void dequeue() {
         if (first != null) {
             listLength--;
 
