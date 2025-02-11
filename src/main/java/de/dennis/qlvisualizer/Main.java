@@ -45,7 +45,7 @@ public class Main extends Application {
         stage.setTitle("QueueList-Visualizer");
         stage.setScene(primaryScene);
         stage.show();
-        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program successful launched.");
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Application started successfully.");
     }
 
     private static Queue primaryList;
@@ -133,8 +133,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program started, try to launch...");
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program started. Attempting to launch the application...");
         launch();
-        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.GREEN, ConsoleUtilities.textStyle.REGULAR, "Program stopped.");
+        ConsoleUtilities.consoleOutPutLine(ConsoleUtilities.colors.RED, ConsoleUtilities.textStyle.REGULAR, "The program was terminated.");
     }
 }
